@@ -1,6 +1,16 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       @canany(['dashboard'])
+      <li class="nav-item nav-category">Dashboard</li>
+      <li class="nav-item">
+        <a class="nav-link" href="/home" aria-expanded="false" aria-controls="ui-basic">
+          <i class="mdi mdi-grid-large menu-icon"></i>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      @endcanany
+
+      @canany(['history-order'])
       <li class="nav-item nav-category">History Order</li>
       <li class="nav-item">
         <a class="nav-link" href="/history-order" aria-expanded="false" aria-controls="ui-basic">

@@ -12,52 +12,61 @@ use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
-    private $permissions = [
-        'dashboard',
-        'transaction-order',
-        'history-order',
-        'masterdata-konsumen',
-        'masterdata-petugas',
-        'masterdata-layanan',
-        'masterdata-pembayaran',
-        'masterdata-pemimpin'
-    ];
-
-    private $roles = [
-        'Admin' => ['all_permissions'],
-        'Petugas' => ['dashboard', 'transaction-order', 'history-order', 'masterdata-konsumen'],
-        'Pemimpin' => ['dashboard', 'history-order'],
-    ];
     /**
-     * Seed the application's database.
+     * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Create permissions
+        $permissions = [
+            'dashboard',
+            'transaction-order',
+            'history-order',
+            'masterdata-konsumen',
+            'masterdata-petugas',
+            'masterdata-layanan',
+            'masterdata-pembayaran',
+            'masterdata-pemimpin'
+        ];
 
-        foreach ($this->permissions as $permission) {
-            Permission::create(['name' => $permission]);
+        foreach ($permissions as $permissionName) {
+            Permission::firstOrCreate(['name' => $permissionName, 'guard_name' => 'web']);
         }
 
+        // Create roles and assign permissions
+        $roles = [
+            'Admin' => ['dashboard', 'transaction-order', 'history-order', 'masterdata-konsumen', 'masterdata-petugas', 'masterdata-layanan', 'masterdata-pembayaran', 'masterdata-pemimpin'],
+            'Petugas' => ['dashboard', 'transaction-order', 'history-order', 'masterdata-konsumen'],
+            'Pemimpin' => ['dashboard', 'history-order'],
+        ];
+
+        foreach ($roles as $roleName => $rolePermissions) {
+            $role = Role::firstOrCreate(['name' => $roleName, 'guard_name' => 'web']);
+            $role->syncPermissions($rolePermissions);
+        }
+
+        // Create an admin user
         $user = User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make(123456)
         ]);
+        
+        // Assign the Admin role to the user
+        $adminRole = Role::where('name', 'Admin')->first();
+        $user->assignRole($adminRole);
 
-        $permissions = Permission::pluck('id', 'id')->all();
-
-        foreach ($this->roles as $roleName => $permissions) {
-            $createdRole = Role::create(['name' => $roleName, 'guard_name' => 'web']);
-
-            
-            if ($roleName === 'Admin') {
-                $user->assignRole([$createdRole->id]);
-                $createdRole->syncPermissions(Permission::pluck('id')->all());
-            } else {
-                $permissionIds = Permission::whereIn('name', $permissions)->pluck('id')->all();
-                $createdRole->syncPermissions($permissionIds);
-            }
-        }
+        $user1 = User::create([
+            'name' => 'Pemimpin',
+            'email' => 'pemimpin@gmail.com',
+            'password' => Hash::make(123456)
+        ]);
+        
+        // Assign the Admin role to the user
+        $pemimpinRole = Role::where('name', 'Pemimpin')->first();
+        $user1->assignRole($pemimpinRole);
     }
 }
+
