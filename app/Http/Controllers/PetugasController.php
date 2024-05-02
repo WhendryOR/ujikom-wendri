@@ -8,12 +8,19 @@ use Illuminate\Support\Facades\Hash;
 
 class PetugasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $petugas = User::where('role', 'petugas')->get();
+        $petugas = User::whereHas('roles', function ($query) {
+            $query->where('name', 'Petugas');
+        })->get();
+
 
         return view('petugas.index', compact('petugas'));
     }
@@ -31,24 +38,13 @@ class PetugasController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'name' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required'
-        ];
-
-        $request->validate($rules);
-
-        $data = [
+        $petugas = User::create([
             'name' => $request->name,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
             'email' => $request->email,
-            'role' => 'petugas'
-        ];
+            'password' => Hash::make($request->password),
+        ]);
 
-        User::create($data);
+        $petugas->assignRole([2]);
 
         return redirect()->back();
     }
@@ -74,23 +70,22 @@ class PetugasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $rules = [
-            'name' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required'
-        ];
+        $user = User::find($id);
+        
+        if($request->password){
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        }else{
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]); 
+        }
 
-        $request->validate($rules);
 
-        $data = [
-            'name' => $request->name,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'email' => $request->email,
-        ];
-
-        User::find($id)->update($data);
 
         return redirect()->back();
     }

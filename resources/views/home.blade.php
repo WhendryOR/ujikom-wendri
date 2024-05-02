@@ -1,21 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="statistics-details d-flex align-items-center justify-content-between">
+            <div>
+                <h6 class="stat-text"><b>Jumlah Konsumen</b></h6>
+                <h3 class="rate-percentage text-center">{{ $konsumen }}</h3>
+            </div>
+            <div>
+                <h6 class="stat-text"><b>Jumlah Order</b></h6>
+                <h3 class="rate-percentage text-center">{{ $order }}</h3>
+            </div>
+            <div>
+                <h6 class="stat-text"><b>Pendapatan Harian</b></h6>
+                <h3 class="rate-percentage text-center">Rp. {{ $pendapatan }}</h3>
+            </div>
+            <div>
+                <h6 class="stat-text"><b>Pendapatan Bulanan</b></h6>
+                <h3 class="rate-percentage text-center">Rp. {{ $pendapatanBulanan }}</h3>
             </div>
         </div>
     </div>

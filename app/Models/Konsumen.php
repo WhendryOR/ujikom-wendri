@@ -9,16 +9,10 @@ class Konsumen extends Model
 {
     use HasFactory;
 
-    protected $table = 'konsumens';
-    protected $fillable = [
-        'nama',
-        'alamat',
-        'no_hp',
-    ];
+    protected $guarded =['id'];
 
-    public function history_order()
+    public function order() 
     {
-        return $this->hasMany(HistoryOrder::class, 'id_konsumen', 'id');
+        return $this->hasMany(Order::class);
     }
-
 }

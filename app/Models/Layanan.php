@@ -9,14 +9,10 @@ class Layanan extends Model
 {
     use HasFactory;
 
-    protected $table = 'layanans';
-    protected $fillable = [
-        'nama',
-        'harga',
-    ];
+    protected $guarded =['id'];
 
-    public function history_order()
+    public function order() 
     {
-        return $this->hasMany(HistoryOrder::class, 'id_layanan', 'id');
+        return $this->hasMany(Order::class);
     }
 }

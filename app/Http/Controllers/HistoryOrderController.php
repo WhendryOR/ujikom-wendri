@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Layanan;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
-class LayananController extends Controller
+class HistoryOrderController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $layanan = Layanan::all();
-
-        return view('layanan.index', compact('layanan'));
+        $order = Order::with('konsumen', 'layanan', 'pembayaran')->get();
+        return view('history-order.index', compact('order'));
     }
 
     /**
@@ -34,21 +34,7 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'nama' => 'required',
-            'harga' => 'required'
-        ];
-
-        $request->validate($rules);
-
-        $data = [
-            'nama' => $request->nama,
-            'harga' => $request->harga
-        ];
-
-        Layanan::create($data);
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -72,21 +58,7 @@ class LayananController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $rules = [
-            'nama' => 'required',
-            'harga' => 'required'
-        ];
-
-        $request->validate($rules);
-
-        $data = [
-            'nama' => $request->nama,
-            'harga' => $request->harga
-        ];
-
-        Layanan::find($id)->update($data);
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -94,7 +66,6 @@ class LayananController extends Controller
      */
     public function destroy(string $id)
     {
-        Layanan::find($id)->delete();
-        return redirect()->back();
+        //
     }
 }

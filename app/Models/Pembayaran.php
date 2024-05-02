@@ -9,13 +9,10 @@ class Pembayaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'pembayarans';
-    protected $fillable = [
-        'nama'
-    ];
+    protected $guarded =['id'];
 
-    public function history_order()
+    public function order() 
     {
-        return $this->hasMany(HistoryOrder::class, 'id_pembayaran', 'id');
+        return $this->hasMany(Order::class);
     }
 }

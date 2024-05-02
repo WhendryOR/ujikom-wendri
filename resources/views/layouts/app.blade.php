@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
+    <title>Londry</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/feather/feather.css">
     <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
@@ -30,13 +30,10 @@
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
                 <div class="me-3">
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
-                        <span class="icon-menu"></span>
                     </button>
                 </div>
                 <div>
-                    <a class="navbar-brand brand-logo" href="index.html">
-                        <img src="images/logo.svg" alt="logo" />
-                    </a>
+                    <h3 class="text-primary"><b>Londry</b></h3>
                     <a class="navbar-brand brand-logo-mini" href="index.html">
                         <img src="images/logo-mini.svg" alt="logo" />
                     </a>
@@ -45,7 +42,6 @@
             <div class="navbar-menu-wrapper d-flex align-items-top"> 
                 <ul class="navbar-nav">
                     <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                        <h1 class="welcome-text">Selamat Datang, <span class="text-black fw-bold">John Doe</span></h1>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -58,8 +54,9 @@
                         @endif
 
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+                        <li class="nav-item dropdown text-right">
+                            <a id="navbarDropdown" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 btn btn-outline-primary" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
@@ -75,6 +72,7 @@
                                 </form>
                             </div>
                         </li>
+                    </div>
                     @endguest
                 </ul>
                     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
@@ -84,7 +82,6 @@
         </nav>
             <!-- partial -->
             <div class="container-fluid page-body-wrapper">
-                <!-- partial:partials/_settings-panel.html -->
                 <div class="theme-setting-wrapper">
                     <div id="settings-trigger"><i class="ti-settings"></i></div>
                     <div id="theme-settings" class="settings-panel">
@@ -191,7 +188,7 @@
                             </div>
                         </div>
                         <!-- To do section tab ends -->
-                        <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+                        {{-- <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
                             <div class="d-flex align-items-center justify-content-between border-bottom">
                                 <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
                                 <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See All</small>
@@ -249,7 +246,7 @@
                                     <small class="text-muted my-auto">47 min</small>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <!-- chat tab ends -->
                     </div>
                 </div>
@@ -264,118 +261,13 @@
                                 <div class="home-tab">
                                     <div class="tab-content tab-content-basic">
                                         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                                            @yield('name') 
                                             <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="statistics-details d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <p class="statistics-title">Bounce Rate</p>
-                                                            <h3 class="rate-percentage">32.53%</h3>
-                                                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
-                                                        </div>
-                                                        <div>
-                                                            <p class="statistics-title">Page Views</p>
-                                                            <h3 class="rate-percentage">7,682</h3>
-                                                            <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
-                                                        </div>
-                                                        <div>
-                                                            <p class="statistics-title">New Sessions</p>
-                                                            <h3 class="rate-percentage">68.8</h3>
-                                                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
-                                                        </div>
-                                                        <div class="d-none d-md-block">
-                                                            <p class="statistics-title">Avg. Time on Site</p>
-                                                            <h3 class="rate-percentage">2m:35s</h3>
-                                                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
-                                                        </div>
-                                                        <div class="d-none d-md-block">
-                                                            <p class="statistics-title">New Sessions</p>
-                                                            <h3 class="rate-percentage">68.8</h3>
-                                                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
-                                                        </div>
-                                                        <div class="d-none d-md-block">
-                                                            <p class="statistics-title">Avg. Time on Site</p>
-                                                            <h3 class="rate-percentage">2m:35s</h3>
-                                                            <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                            {{-- <div class="row">
-                                                <div class="col-lg-8 d-flex flex-column">
-                                                    <div class="row flex-grow">
-                                                        <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
-                                                            <div class="card card-rounded">
-                                                                <div class="card-body">
-                                                                    <div class="d-sm-flex justify-content-between align-items-start">
-                                                                        <div>
-                                                                            <h4 class="card-title card-title-dash">Performance Line Chart</h4>
-                                                                            <h5 class="card-subtitle card-subtitle-dash">Lorem Ipsum is simply dummy text of the printing</h5>
-                                                                        </div>
-                                                                        <div id="performance-line-legend"></div>
-                                                                    </div>
-                                                                    <div class="chartjs-wrapper mt-5">
-                                                                        <canvas id="performaneLine"></canvas>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 d-flex flex-column">
-                                                    <div class="row flex-grow">
-                                                        <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                                                            <div class="card bg-primary card-rounded">
-                                                                <div class="card-body pb-0">
-                                                                    <h4 class="card-title card-title-dash text-white mb-4">Status Summary</h4>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-4">
-                                                                            <p class="status-summary-ight-white mb-1">Closed Value</p>
-                                                                            <h2 class="text-info">357</h2>
-                                                                        </div>
-                                                                        <div class="col-sm-8">
-                                                                            <div class="status-summary-chart-wrapper pb-4">
-                                                                                <canvas id="status-summary"></canvas>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                                                            <div class="card card-rounded">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
-                                                                                <div class="circle-progress-width">
-                                                                                    <div id="totalVisitors" class="progressbar-js-circle pr-2"></div>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <p class="text-small mb-2">Total Visitors</p>
-                                                                                    <h4 class="mb-0 fw-bold">26.80%</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div class="d-flex justify-content-between align-items-center">
-                                                                                <div class="circle-progress-width">
-                                                                                    <div id="visitperday" class="progressbar-js-circle pr-2"></div>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <p class="text-small mb-2">Visits per day</p>
-                                                                                    <h4 class="mb-0 fw-bold">9065</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
+                                                @yield('content')
                                             </div>
-                                            <div class="row"> --}}
-                                                {{-- <div class="col-lg-8 d-flex flex-column">
+                                            {{-- <div class="row"> 
+                                                <div class="col-lg-8 d-flex flex-column">
                                                     <div class="row flex-grow">
                                                         <div class="col-12 grid-margin stretch-card">
                                                             <div class="card card-rounded">
@@ -767,7 +659,6 @@
                                                                                                     <div class="d-flex justify-content-between align-items-center">
                                                                                                         <h4 class="card-title card-title-dash">Todo list</h4>
                                                                                                         <div class="add-items d-flex mb-0">
-                                                                                                            <!-- <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> -->
                                                                                                             <button class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"><i class="mdi mdi-plus"></i></button>
                                                                                                         </div>
                                                                                                     </div>
@@ -951,25 +842,20 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div> --}}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <!-- content-wrapper ends -->
                                             <!-- partial:partials/_footer.html -->
                                             
                                             <!-- partial -->
                                         </div>
-                                        <footer class="footer">
-                                            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                                                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
-                                                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
-                                            </div>
-                                        </footer>
+                                        
                                         <!-- main-panel ends -->
                                     </div>
                                     <!-- page-body-wrapper ends -->

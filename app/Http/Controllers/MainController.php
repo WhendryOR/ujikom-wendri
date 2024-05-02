@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HistoryOrder;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = HistoryOrder::with('konsumen', 'layanan', 'pembayaran')->get();
-        return view('welcome');
+        $data = Order::with('konsumen', 'layanan', 'pembayaran')->get();
+        return view('welcome', compact('data'));
     }
 
     /**
